@@ -30,18 +30,17 @@ body {
 
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
-img { max-width: 100%; display: block; }
 
 ::selection { background: var(--teal-light); color: var(--void); }
 
-/* Subtle grain overlay */
+/* Subtle digital grain overlay */
 .noise-overlay {
   position: fixed; inset: 0; pointer-events: none; z-index: 1000;
   opacity: 0.025; mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* ---------- NAV ---------- */
+/* ---------- NAVIGATION ---------- */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   background: rgba(5, 9, 15, 0.55);
@@ -75,7 +74,7 @@ img { max-width: 100%; display: block; }
 }
 .nav-toggle span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: 0.3s; }
 
-/* ---------- SECTION SHELL ---------- */
+/* ---------- SECTION UTILITIES ---------- */
 .section {
   position: relative;
   padding: 160px 32px 120px;
@@ -88,13 +87,13 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* Ghost numerals background decoration */
+/* Section Background Ghost Figures */
 .about::before, .skills::before, .experience::before, .contact::before {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(110px, 16vw, 220px);
   line-height: 1;
-  color: rgba(255, 255, 255, 0.032);
+  color: rgba(255, 255, 255, 0.025);
   position: absolute;
   top: 60px;
   right: 12px;
@@ -127,7 +126,7 @@ img { max-width: 100%; display: block; }
   background: var(--gold);
 }
 
-/* Reveal-on-scroll base utilities */
+/* Animations Trigger */
 [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
 [data-reveal].in-view { opacity: 1; transform: translateY(0); }
 
@@ -157,6 +156,7 @@ img { max-width: 100%; display: block; }
 }
 .hero-sub { color: var(--muted); font-size: 16px; max-width: 440px; margin-bottom: 34px; }
 .hero-actions { display: flex; align-items: center; gap: 26px; }
+
 .btn {
   display: inline-flex; align-items: center; justify-content: center;
   padding: 14px 30px; border-radius: 999px; font-size: 14px; font-weight: 700;
@@ -175,67 +175,66 @@ img { max-width: 100%; display: block; }
   border: 1px solid var(--card-border); border-radius: 50%; color: var(--muted);
   transition: 0.25s;
 }
-.hero-social a:hover { color: var(--gold); border-color: var(--gold); }
+.hero-social a:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
 
-/* NEW REWRITTEN HERO-RIGHT VIEWPORT FILLER (No portrait frames) */
-.hero-right {
+/* REPLACED IMAGE BOX WITH VISUAL SKILL DASHBOARD */
+.hero-portrait {
   position: relative;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 16px;
-  min-height: 380px;
+  min-height: 400px;
+  width: 100%;
 }
 
-/* Background Glowing Orb */
-.hero-orb {
+/* Ambient glowing atmospheric orb */
+.hero-portrait::before {
+  content: '';
   position: absolute;
-  width: 350px; height: 350px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(61,155,184,0.18) 0%, transparent 70%);
-  filter: blur(20px);
+  width: 340px; height: 340px;
+  background: radial-gradient(circle, rgba(61,155,184,0.2) 0%, transparent 70%);
+  filter: blur(25px);
   z-index: 0;
-  animation: orbFloat 8s ease-in-out infinite;
+  animation: atmosphericFloat 8s ease-in-out infinite;
 }
 
-/* Glassmorphic Floating Skill Elements */
-.floating-card {
+/* Floating interactive feature modules */
+.portrait-frame, .portrait-placeholder {
   position: relative;
   z-index: 1;
-  padding: 16px 26px;
-  border-radius: 16px;
+  padding: 18px 28px;
+  border-radius: 18px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--card-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 14.5px;
+  font-weight: 600;
+  font-size: 15px;
   color: var(--white);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.2);
   transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.floating-card:hover {
-  transform: translateY(-6px) scale(1.02);
+
+.portrait-frame:hover, .portrait-placeholder:hover {
+  transform: translateY(-5px) scale(1.03);
   border-color: var(--teal-light);
-  box-shadow: 0 15px 35px rgba(61, 155, 184, 0.25);
+  box-shadow: 0 15px 35px rgba(61, 155, 184, 0.2);
 }
 
-/* Drifting staggered idle movements for depth */
-.floating-card:nth-child(2) { animation: floatEffect 5s ease-in-out infinite alternate; }
-.floating-card:nth-child(3) { animation: floatEffect 6s ease-in-out infinite alternate-reverse; }
-.floating-card:nth-child(4) { animation: floatEffect 4.5s ease-in-out infinite alternate; }
-.floating-card:nth-child(5) { animation: floatEffect 7s ease-in-out infinite alternate-reverse; }
-.floating-card:nth-child(6) { animation: floatEffect 5.5s ease-in-out infinite alternate; }
+/* Smooth, staggered float motions for depth */
+.portrait-frame { animation: floatingNode 5.5s ease-in-out infinite alternate; }
+.portrait-placeholder { animation: floatingNode 4.5s ease-in-out infinite alternate-reverse; }
 
-@keyframes orbFloat {
+@keyframes atmosphericFloat {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-15px) scale(1.05); }
+  50% { transform: translateY(-20px) scale(1.06); }
 }
-@keyframes floatEffect {
+@keyframes floatingNode {
   0% { transform: translateY(0); }
-  100% { transform: translateY(-12px); }
+  100% { transform: translateY(-15px); }
 }
 
 .scroll-cue {
@@ -276,7 +275,6 @@ img { max-width: 100%; display: block; }
   font-size: clamp(32px, 4.4vw, 46px); margin-bottom: 34px;
   background: linear-gradient(100deg, var(--white) 55%, var(--teal-light));
   -webkit-background-clip: text; background-clip: text; color: transparent;
-  position: relative; z-index: 1;
 }
 .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
 .skill-card {
@@ -336,10 +334,10 @@ img { max-width: 100%; display: block; }
 
 /* ---------- RESPONSIVE BREAKPOINTS ---------- */
 @media (max-width: 860px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+  .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 32px; }
   .hero-sub { margin: 0 auto 34px; }
   .hero-actions { justify-content: center; }
-  .hero-right { min-height: auto; padding: 20px 0; }
+  .hero-portrait { min-height: auto; padding: 10px 0; }
   
   .about-grid { grid-template-columns: 1fr; }
   .skills-grid { grid-template-columns: 1fr; }
@@ -366,5 +364,5 @@ img { max-width: 100%; display: block; }
   html { scroll-behavior: auto; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
   .scroll-cue span { animation: none; }
-  .hero-orb, .floating-card { animation: none !important; }
+  .hero-portrait::before, .portrait-frame, .portrait-placeholder { animation: none !important; }
 }
