@@ -77,10 +77,16 @@ img { max-width: 100%; display: block; }
 /* ---------- SECTION SHELL ---------- */
 .section {
   position: relative;
-  padding: 140px 32px 100px;
+  padding: 160px 32px 120px;
   max-width: var(--max);
   margin: 0 auto;
   overflow: hidden;
+}
+
+/* thin divider line at the top of each section (except hero) so sections
+   read as clearly separate blocks while scrolling, instead of bleeding together */
+.about, .skills, .experience, .contact {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 /* Ghost numerals — signature layout element behind each section */
