@@ -43,15 +43,3 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 revealEls.forEach(el => revealObserver.observe(el));
-
-// Profile image fallback: hide placeholder if a real image loads
-const profileImg = document.getElementById('profileImg');
-const placeholder = document.getElementById('portraitPlaceholder');
-
-profileImg.addEventListener('load', () => {
-  if (profileImg.naturalWidth > 0) placeholder.style.display = 'none';
-});
-profileImg.addEventListener('error', () => {
-  profileImg.style.display = 'none';
-  placeholder.style.display = 'flex';
-});
